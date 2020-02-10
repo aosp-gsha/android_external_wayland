@@ -63,6 +63,14 @@ genrule {
     tools: ["wayland_scanner"],
 }
 
+// Generate protocol header files used by the server
+genrule {
+    name: "wayland_core_server_protocol_headers",
+    cmd: "$(location wayland_scanner) server-header < $(in) > $(out)",
+    srcs: [":wayland_core_protocol"],
+    out: ["wayland-server-protocol.h"],
+    tools: ["wayland_scanner"],
+}
 // Generate protocol header files used by the client
 genrule {
     name: "wayland_core_client_protocol_headers",
